@@ -2,6 +2,7 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import generateVerificationCode from "../utils/generateVerificationCode.js";
 import generateTokenAndSetCookie from "../utils/generateToken&SetCookie.js";
+import sendVerificationEmail from "../mail/sendVerificationEmail.js";
 
 const signup = async (req, res) => {
     const { email, password, name } = req.body;
@@ -31,6 +32,8 @@ const signup = async (req, res) => {
         //jwt
         generateTokenAndSetCookie(res, newUser._id);
 
+        await sendVerificationEmail(newUser.email, verificationToken);
+
         res.status(200).json({
             success: true,
             message: "User created successfully",
@@ -46,12 +49,4 @@ const signup = async (req, res) => {
     }
 }
 
-const login = async (req, res) => {
-    res.send("login");
-}
-
-const logout = async (req, res) => {
-    res.send("logout");
-}
-
-export { signup, login, logout };
+export default signup;
