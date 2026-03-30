@@ -5,7 +5,9 @@
   "main": "/server/index.js",
   "type": "module",
   "scripts": {
-    "dev": "cd server && npm run dev",
+    "dev": "npm run server && npm run client",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +22,7 @@
   },
   "homepage": "https://github.com/Ishita-09-sahoo/LoginPage#readme",
   "dependencies": {
+    "@tailwindcss/vite": "^4.2.2",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "crypto": "^1.0.1",
@@ -28,6 +31,7 @@
     "jsonwebtoken": "^9.0.3",
     "mailtrap": "^4.4.0",
     "mongodb": "^7.1.0",
-    "mongoose": "^9.3.0"
+    "mongoose": "^9.3.0",
+    "tailwindcss": "^4.2.2"
   }
 }
