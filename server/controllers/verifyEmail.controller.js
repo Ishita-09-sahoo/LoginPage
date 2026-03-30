@@ -24,12 +24,12 @@ const verifyEmail = async (req, res) => {
     await sendWelcomeEmail(newUser.email, newUser.name);
 
     res.status(200).json({
-        success: true,
-        message: "Email verified successfully",
-    })
+      success: true,
+      message: "Email verified successfully",
+    });
   } catch (error) {
     res.status(400).send({ success: false, message: error.message });
   }
-};  
+};
 
 export default verifyEmail;
