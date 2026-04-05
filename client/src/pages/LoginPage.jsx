@@ -3,18 +3,17 @@ import { motion as Motion } from "framer-motion";
 import Input from "../components/Input";
 import { Loader, Lock, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useStore } from "../store/authStore";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, isLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const {login, isLoading, error} = useStore();
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    isLoading(true);
-    setTimeout(() => {
-      isLoading(false);
-    }, 500);
+    await login(email, password);
   };
 
   return (
@@ -55,13 +54,15 @@ function LoginPage() {
             </Link>
           </div>
 
+          {error && <p className="text-red-500 font-semibold mt-2">{error}</p>}
+
           <Motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="w-full py-3 px-4 bg-linear-to-r from-green-500 to-emerald-600 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200"
             type="submit"
           >
-            {loading ? <Loader className="w-6 h-6 animate-spin mx-auto" /> : "Login"}
+            {isLoading ? <Loader className="w-6 h-6 animate-spin mx-auto" /> : "Login"}
           </Motion.button>
         </form>
       </div>
