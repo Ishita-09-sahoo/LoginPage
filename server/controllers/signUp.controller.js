@@ -41,13 +41,13 @@ const signup = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "User created successfully",
-      newUser: {
+      user: {
         ...newUser._doc,
         password: undefined,
       },
     });
   } catch (error) {
-    res.status(400).json({ error: error.message, success: false });
+    res.status(400).json({ message: error.message, success: false });
   }
 };
 
